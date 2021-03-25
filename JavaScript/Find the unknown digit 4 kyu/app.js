@@ -1,7 +1,7 @@
 function solveExpression(exp) {
   let number1 = (number2 = resultNumber = operator = '');
   let appearedDigits = new Set();
-  let firstNegative = (secondNegative = resultNegative = bioRazmak = false);
+  let firstNegative = (secondNegative = resultNegative = wasEquals = false);
 
   seperateNumbers();
 
@@ -51,12 +51,12 @@ function solveExpression(exp) {
       }
 
       if (exp[i] === '=') {
-        bioRazmak = true;
+        wasEquals = true;
         continue;
       }
 
       if (exp[i] === '-') {
-        if (bioRazmak) {
+        if (wasEquals) {
           resultNegative = true;
           continue;
         } else {
@@ -69,7 +69,7 @@ function solveExpression(exp) {
         appearedDigits.add(+exp[i]);
       }
 
-      if (bioRazmak) {
+      if (wasEquals) {
         resultNumber += exp[i];
       } else if (operator.length === 1) {
         number2 += exp[i];
